@@ -24,3 +24,10 @@
   outline: none;
   border-color: #4f005f;
 }
+
+.invalid {
+  color: red;
+}
+.invalid + input {
+  background-color: rgb(231, 121, 121);
+}
