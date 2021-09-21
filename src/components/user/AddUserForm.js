@@ -7,36 +7,57 @@ import { useState } from "react";
 const AddUserForm = () => {
   const [enteredUserName, setUserName] = useState("");
   const [enteredAge, setAge] = useState("");
+  const [isValidUsername, setValidityOfUsername] = useState(true);
+  const [isValidAge, setValidityOfAge] = useState(true);
 
   const usernameChangedHandler = (event) => {
+    setValidityOfUsername(true);
     setUserName(event.target.value);
   };
 
   const ageChangedHandler = (event) => {
+    setValidityOfAge(true);
     setAge(event.target.value);
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(enteredUserName);
-    console.log(enteredAge);
+    if (enteredUserName.trim().length === 0) {
+      setValidityOfUsername(false);
+      return;
+    }
+    if (enteredAge.trim().length === 0) {
+      setValidityOfAge(false);
+      return;
+    }
     setUserName("");
     setAge("");
   };
   return (
-    <Card className="input">
+    <Card className={`${"input"}`}>
       <form onSubmit={onSubmitHandler}>
-        <label htmlFor="username">Username</label>
+        <label
+          htmlFor="username"
+          className={`${isValidUsername ? "" : "invalid"}`}
+        >
+          Username
+        </label>
         <input
           type="text"
           id="username"
           onChange={usernameChangedHandler}
           value={enteredUserName}
         />
-        <label htmlFor="age (Years)">Age</label>
+        <label
+          htmlFor="age (Years)"
+          className={`${isValidAge ? "" : "invalid"}`}
+        >
+          Age
+        </label>
         <input
           type="number"
           id="age"
+          className={`${isValidAge ? "" : "invalid"}`}
           onChange={ageChangedHandler}
           value={enteredAge}
         />
