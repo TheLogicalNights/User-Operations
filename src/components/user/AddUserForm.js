@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import "../ui/Button.css";
 import { useState } from "react";
 
-const AddUserForm = () => {
+const AddUserForm = (props) => {
   const [enteredUserName, setUserName] = useState("");
   const [enteredAge, setAge] = useState("");
   const [isValidUsername, setValidityOfUsername] = useState(true);
@@ -32,6 +32,7 @@ const AddUserForm = () => {
     }
     setUserName("");
     setAge("");
+    props.onAddUser(enteredUserName, enteredAge);
   };
   return (
     <Card className={`${"input"}`}>
